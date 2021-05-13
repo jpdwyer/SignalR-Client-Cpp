@@ -8,6 +8,9 @@
 #include <functional>
 #include <map>
 #include <chrono>
+#ifdef USE_CPPRESTSDK
+#include <signalrclient/signalr_client_config.h>
+#endif 
 
 namespace signalr
 {
@@ -62,6 +65,9 @@ namespace signalr
     {
     public:
         virtual void send(const std::string& url, const http_request& request, std::function<void(const http_response&, std::exception_ptr)> callback) = 0;
+#ifdef USE_CPPRESTSDK
+        virtual void set_http_config(const web::http::client::http_client_config & http_client_config) = 0;
+#endif
 
         virtual ~http_client() {}
     };

@@ -76,7 +76,7 @@ namespace signalr
             });
         }
 
-        web::http::client::http_client client(utility::conversions::to_string_t(url));
+        web::http::client::http_client client(utility::conversions::to_string_t(url), m_http_client_config);
         client.request(http_request, cts.get_token())
             .then([context, callback](pplx::task<web::http::http_response> response_task)
         {

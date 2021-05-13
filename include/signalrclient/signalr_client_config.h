@@ -39,7 +39,6 @@ namespace signalr
 #endif
 
         SIGNALRCLIENT_API __cdecl signalr_client_config();
-
         SIGNALRCLIENT_API const std::map<std::string, std::string>& __cdecl get_http_headers() const noexcept;
         SIGNALRCLIENT_API std::map<std::string, std::string>& __cdecl get_http_headers() noexcept;
         SIGNALRCLIENT_API void __cdecl set_http_headers(const std::map<std::string, std::string>& http_headers);

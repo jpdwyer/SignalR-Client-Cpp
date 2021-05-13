@@ -44,7 +44,14 @@ namespace signalr
         else
         {
 #ifdef USE_CPPRESTSDK
-            m_http_client_factory = [](const signalr_client_config&) { return std::unique_ptr<class http_client>(new default_http_client()); };
+            m_http_client_factory = [log_writer](const signalr_client_config& conf) {
+
+                auto client = new default_http_client();
+                auto config = conf.get_http_client_config();
+
+                client->set_http_config(config);
+                return std::unique_ptr<class http_client>(client);
+            };
 #endif
         }
 

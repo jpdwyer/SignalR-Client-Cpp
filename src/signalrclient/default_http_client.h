@@ -5,6 +5,10 @@
 #pragma once
 
 #include "signalrclient/http_client.h"
+#ifdef USE_CPPRESTSDK
+#include "signalrclient/signalr_client_config.h"
+#endif
+
 
 namespace signalr
 {
@@ -12,5 +16,14 @@ namespace signalr
     {
     public:
         void send(const std::string& url, const http_request& request, std::function<void(const http_response&, std::exception_ptr)> callback) override;
+#ifdef USE_CPPRESTSDK
+        void set_http_config(const web::http::client::http_client_config & http_client_config)
+        {
+            m_http_client_config = http_client_config;
+        }
+
+    private:
+        web::http::client::http_client_config m_http_client_config;
+#endif
     };
 }
